@@ -7,6 +7,7 @@ package frc.robot.subsystems;
 import edu.wpi.first.math.geometry.Rotation2d;
 import edu.wpi.first.math.kinematics.SwerveModulePosition;
 import edu.wpi.first.math.kinematics.SwerveModuleState;
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
 import com.revrobotics.CANSparkMax;
 import com.revrobotics.CANSparkMaxLowLevel.MotorType;
@@ -27,7 +28,7 @@ public class MAXSwerveModule {
   private final SparkMaxPIDController m_drivingPIDController;
   private final SparkMaxPIDController m_turningPIDController;
 
-  private double m_chassisAngularOffset = 0;
+  private double m_chassisAngularOffset = 90;
   private SwerveModuleState m_desiredState = new SwerveModuleState(0.0, new Rotation2d());
 
   /**
@@ -94,6 +95,14 @@ public class MAXSwerveModule {
     m_turningPIDController.setFF(ModuleConstants.kTurningFF);
     m_turningPIDController.setOutputRange(ModuleConstants.kTurningMinOutput,
         ModuleConstants.kTurningMaxOutput);
+
+    SmartDashboard.putNumber("Driving P", ModuleConstants.kDrivingP);
+    SmartDashboard.putNumber("Driving D", ModuleConstants.kDrivingD);
+    SmartDashboard.putNumber("Turning P", ModuleConstants.kTurningP);
+    SmartDashboard.putNumber("Turning D", ModuleConstants.kTurningD);
+    SmartDashboard.putNumber("Max driving speed", ModuleConstants.kDrivingMaxOutput);
+    SmartDashboard.putNumber("Max turning speed", ModuleConstants.kTurningMaxOutput);
+
 
     m_drivingSparkMax.setIdleMode(ModuleConstants.kDrivingMotorIdleMode);
     m_turningSparkMax.setIdleMode(ModuleConstants.kTurningMotorIdleMode);
